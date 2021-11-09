@@ -36,9 +36,9 @@ function updateClock(id, end) {
 }
 
 // Clock for remaining time to enroll
-// const enroll_deadline = new Date(2021, 10, 29, 23, 59, 59);
-// let timeInterval = setInterval("updateClock('enroll_clock', enroll_deadline)", 1000);
+const enroll_deadline = new Date(2021, 10, 29, 23, 59, 59);
+let timeInterval = setInterval("updateClock('enroll_clock', enroll_deadline)", 1000);
 
 // Clock for website launch
-const reveal_deadline = new Date(2021, 10, 24, 18, 30);
-let timeInterval = setInterval("updateClock('countdown_clock', reveal_deadline)", 1000);
+// const reveal_deadline = new Date(2021, 10, 24, 18, 30);
+// let timeInterval = setInterval("updateClock('countdown_clock', reveal_deadline)", 1000);

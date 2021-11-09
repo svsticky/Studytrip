@@ -46,7 +46,7 @@ a:hover,
 a:focus,
 a:active,
 a.active {
-    color: #c53f78;
+    color: #D1262A;
 }
 
 h1,
@@ -88,7 +88,7 @@ h6 {
 .open .dropdown-toggle.btn-primary {
     border-color: #111;
     color: #fff;
-    background-color: #c53f78;
+    background-color: #D1262A;
 }
 
 .btn-primary:active,
@@ -146,7 +146,7 @@ fieldset[disabled] .btn-primary.active {
 .open .dropdown-toggle.btn-xl {
     border-color: #111;
     color: #fff;
-    background-color: #c53f78;
+    background-color: #D1262A;
 }
 
 .btn-xl:active,
@@ -194,7 +194,7 @@ fieldset[disabled] .btn-xl.active {
 .navbar-default .navbar-brand:focus,
 .navbar-default .navbar-brand:active,
 .navbar-default .navbar-brand.active {
-	color: #c53f78;
+	color: #D1262A;
 }
 
 .navbar-default .navbar-collapse {
@@ -265,7 +265,7 @@ fieldset[disabled] .btn-xl.active {
 
     .navbar-default.navbar-shrink {
         padding: 10px 0;
-        background-color: #c53f78;
+        background-color: #D1262A;
     }
 
     .navbar-default.navbar-shrink .navbar-brand {
@@ -282,7 +282,10 @@ header {
     color: #fff;
     background-attachment: scroll;
     background-position: center center;
-    background-color: #a87272;
+    background-color: #555;
+    
+    background-image: url('../img/header.jpg');
+    
     background-repeat: none;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -948,27 +951,13 @@ label {
 	margin-top: -10px;
 }
 
-#clockdiv{
+#enroll_clock{
 	font-family: sans-serif;
 	color: #fff;
 	display: inline-block;
 	font-weight: 100;
 	text-align: center;
 	font-size: 30px;
-}
-
-#clockdiv > div{
-	padding: 10px;
-	border-radius: 3px;
-	background: #00BF96;
-	display: inline-block;
-}
-
-#clockdiv div > span{
-	padding: 15px;
-	border-radius: 3px;
-	background: #00816A;
-	display: inline-block;
 }
 
 .smalltext{
