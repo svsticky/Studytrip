@@ -179,6 +179,10 @@ fieldset[disabled] .btn-xl.active {
     background-color: #fff;
 }
 
+.navbar {
+    background-color: rgba(100,100,100,0.75) !important;
+}
+
 .navbar-default {
     border-color: transparent;
     background-color: #222;
@@ -265,7 +269,7 @@ fieldset[disabled] .btn-xl.active {
 
     .navbar-default.navbar-shrink {
         padding: 10px 0;
-        background-color: #D1262A;
+        background-color: #D1262A !important;
     }
 
     .navbar-default.navbar-shrink .navbar-brand {
@@ -291,7 +295,7 @@ header {
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
-	height: calc(100vh - 90px);
+	height: 100vh;
 }
 
 header .intro-text #more-button {
