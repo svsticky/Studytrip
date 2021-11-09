@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="In 2022 Foundation Sticky will organise a studytrip to somewhere in the world.">
+    <!-- <meta property="url" content="http://svsticky.nl/panda"> -->
     <meta name="author" content="Studievereniging Sticky">
     <link rel="icon" type="image/ico" href="favicon.ico">
 
@@ -60,7 +61,12 @@
           <div id="trip-logo">
             <!-- <img src="img/logo.png"/> -->
             <div class="intro-heading">
-              ?
+              <div id="countdown_clock">
+                <span class="days">0</span> days</br>
+                <span class="hours">0</span> hours</br>
+                <span class="minutes">0</span> minutes</br>
+                <span class="seconds">0</span> seconds</br>
+              </div>
             </div>
           </div>
           <div id="more-button">
@@ -69,11 +75,18 @@
         </div>
       </div>
     </header>
+    
+    <!-- <section>
+      <h1>Location</h1>
+      <p>
+        Check <a href="https://open.spotify.com/playlist/4ThXJJ1DqlvGYmnDevJ1qK?si=83379e97fc064440">HERE</a> the playlist for during the hype drinks!
+      </p>
+    </section> -->
 
     <footer>
       <div class="container">
         <div class="row">
-          <span class="copyright">Copyright &copy; Foundation Sticky 2021</span>
+          <span class="copyright">Copyright &copy; Foundation Sticky <span id="current_year"></span></span>
           </br>
         </div>
       </div>
@@ -93,7 +106,6 @@
     <!-- Custom Theme JavaScript -->
     <script src="js/agency.js"></script>
 
-    <!-- Clock JavaScript, not being used -->
-    <!-- <script src="js/clock.js"></script> -->
+    <script src="js/clock.js"></script>
   </body>
 </html>

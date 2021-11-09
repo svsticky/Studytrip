@@ -282,13 +282,13 @@ header {
     color: #fff;
     background-attachment: scroll;
     background-position: center center;
-    background-color: #555;
+    background-color: #a87272;
     background-repeat: none;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
-	  height: 100vh;
+	height: calc(100vh - 90px);
 }
 
 header .intro-text #more-button {

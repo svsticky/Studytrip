@@ -1,9 +1,13 @@
+// Set year in footer
+document.getElementById("current_year").textContent = new Date().getFullYear();
+
+// Set clock
 function getTimeRemaining(endtime) {
-  var t = Date.parse(endtime) - Date.parse(new Date());
-  var seconds = Math.floor((t / 1000) % 60);
-  var minutes = Math.floor((t / 1000 / 60) % 60);
-  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-  var days = Math.floor(t / (1000 * 60 * 60 * 24));
+  const t = Date.parse(endtime) - Date.parse(new Date());
+  const seconds = Math.floor((t / 1000) % 60);
+  const minutes = Math.floor((t / 1000 / 60) % 60);
+  const hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+  const days = Math.floor(t / (1000 * 60 * 60 * 24));
   return {
     'total': t,
     'days': days,
@@ -13,29 +17,28 @@ function getTimeRemaining(endtime) {
   };
 }
 
-function initializeClock(id, endtime) {
-  var clock = document.getElementById(id);
-  var daysSpan = clock.querySelector('.days');
-  var hoursSpan = clock.querySelector('.hours');
-  var minutesSpan = clock.querySelector('.minutes');
-  var secondsSpan = clock.querySelector('.seconds');
+function updateClock(id, end) {
+  const clock = document.getElementById(id);
+  const day = clock.querySelector('.days');
+  const hour = clock.querySelector('.hours');
+  const minute = clock.querySelector('.minutes');
+  const second = clock.querySelector('.seconds');
+  const t = getTimeRemaining(end);
 
-  function updateClock() {
-    var t = getTimeRemaining(endtime);
+  day.innerHTML = t.days;
+  hour.innerHTML = ('0' + t.hours).slice(-2);
+  minute.innerHTML = ('0' + t.minutes).slice(-2);
+  second.innerHTML = ('0' + t.seconds).slice(-2);
 
-    daysSpan.innerHTML = t.days;
-    hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-    minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
-
-    if (t.total <= 0) {
-      clearInterval(timeinterval);
-    }
+  if (t.total <= 0) {
+    clearInterval(timeInterval);
   }
-
-  updateClock();
-  var timeinterval = setInterval(updateClock, 1000);
 }
 
-var deadline = new Date(17, 9, 10, 18, 00);
-initializeClock('clockdiv', deadline);
+// Clock for remaining time to enroll
+// const enroll_deadline = new Date(2021, 10, 29, 23, 59, 59);
+// let timeInterval = setInterval("updateClock('enroll_clock', enroll_deadline)", 1000);
+
+// Clock for website launch
+const reveal_deadline = new Date(2021, 10, 15, 19, 15);
+let timeInterval = setInterval("updateClock('countdown_clock', reveal_deadline)", 1000);
