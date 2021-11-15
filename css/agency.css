@@ -359,8 +359,8 @@ header .intro-text .intro-heading {
 	}
 }
 
-#signup{
-  color:white;
+#signup, #presentation {
+  color: #ffffff;
 }
 
 section {
