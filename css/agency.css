@@ -328,6 +328,10 @@ header .intro-text .intro-heading {
 	width: 90%;
 }
 
+.company-page-logo {
+    background-color: rgba(0,0,0,0.5);
+}
+
 @media(min-width:1210px) {
 
     header .intro-text .intro-lead-in {
