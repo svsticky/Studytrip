@@ -9,6 +9,14 @@ body {
     font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
+.active > a {
+    background-color: #197052 !important;
+}
+
+.page-scroll:hover:not(.active > a) {
+    color: #197052 !important;
+}
+
 .text-muted {
     color: #777;
 }
@@ -397,7 +405,11 @@ section h3.section-subheading {
     text-transform: none;
 }
 
-#portfolio .portfolio-item {
+.icon-green {
+    color: #197052;
+}
+
+    #portfolio .portfolio-item {
     right: 0;
     margin: 0 0 15px;
 }
