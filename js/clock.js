@@ -36,7 +36,7 @@ function updateClock(id, end) {
 }
 
 // Clock for remaining time to enroll
-const enroll_deadline = new Date(2023, 11, 10, 23, 59, 59);
+const enroll_deadline = new Date(2024, 12, 6, 23, 59, 59);
 let timeInterval = setInterval("updateClock('enroll_clock', enroll_deadline)", 1000);
 
 // Clock for website launch
