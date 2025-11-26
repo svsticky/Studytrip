@@ -77,9 +77,7 @@ export default function Countdown() {
       </div>
 
       <div
-        className={`fixed right-6 z-50 ${
-          /iPhone|iPad|iPod/.test(navigator.userAgent) ? "bottom-0" : "bottom-6"
-        }`}
+        className={`fixed right-6 z-50 bottom-6`}
       >
         <Button
           className="
