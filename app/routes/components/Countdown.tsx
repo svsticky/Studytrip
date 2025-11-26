@@ -15,7 +15,7 @@ type SignupInfo = {
 };
 
 const signup: SignupInfo = {
-  presentationLink: "https://www.canva.com/design/...",
+  presentationLink: "https://studytrip.svsticky.nl/presentation.pdf",
   signupForm: "https://forms.gle/UTaUSbQnYTQPYtP56",
   deadline: "2025-12-12T23:59:59",
 };
