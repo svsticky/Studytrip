@@ -21,10 +21,10 @@ const schedule: ScheduleItem[] = [
     text: "At the first participants drinks you will sign the contract and vote for the daytrip",
   },
   {
-    date: "To be determined",
-    title: "Lunch lectures",
+    date: "To be announced",
+    title: "Company events",
     image: "/lecture.jpg",
-    text: "We will attend sponsor lectures. The dates are yet to be determined",
+    text: "We will participate in lunch lectures at Utrecht University and in-house sessions at the sponsor’s location. Dates will be announced at a later time.",
   },
   {
     date: "April 11th",
@@ -33,10 +33,22 @@ const schedule: ScheduleItem[] = [
     text: "We depart from Amsterdam to Tokyo.",
   },
   {
+    date: "To be announced",
+    title: "University visit",
+    image: "/uTokyo.jpg",
+    text: "Explore one of Asia's top universities with a campus tour and meet the students there!",
+  },
+  {
     date: "April 15th",
     title: "Company Visit — GrooveX",
     image: "/groovex.jpg",
     text: "An afternoon of robotics and AI.",
+  },
+  {
+    date: "To be announced",
+    title: "Daytrip",
+    image: "/disneyland.jpg",
+    text: "We will go on a daytrip with the whole group. At the first participants drinks we will vote on the daytrip.",
   },
   {
     date: "April 22th",

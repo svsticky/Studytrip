@@ -15,7 +15,7 @@ type SignupInfo = {
 };
 
 const signup: SignupInfo = {
-  presentationLink: "https://studytrip.svsticky.nl/presentation.pdf",
+  presentationLink: "/presentation.pdf",
   signupForm: "https://forms.gle/UTaUSbQnYTQPYtP56",
   deadline: "2025-12-12T23:59:59",
 };
@@ -76,9 +76,7 @@ export default function Countdown() {
         </div>
       </div>
 
-      <div
-        className={`fixed right-6 z-50 bottom-6`}
-      >
+      <div className={`fixed right-6 z-50 bottom-6`}>
         <Button
           className="
       h-24 w-32 rounded-xl
