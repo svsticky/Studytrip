@@ -58,7 +58,7 @@ export default function Countdown() {
           <div>{timeLeft.seconds}s</div>
         </div>
 
-        <div className="flex gap-4 justify-center">
+        <div className="flex gap-4 justify-center flex-col md:flex-row">
           <Button asChild className="px-10 py-6 text-lg">
             <a href={signup.presentationLink} target="_blank">
               View Presentation

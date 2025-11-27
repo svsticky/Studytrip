@@ -71,7 +71,7 @@ export default function Schedule() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
             viewport={{ once: true, amount: 0 }}
-            className="mb-12 ml-6 relative"
+            className="mb-12 relative"
           >
             <div className="bg-white shadow-lg rounded-lg p-6 flex items-center gap-6">
               <img
