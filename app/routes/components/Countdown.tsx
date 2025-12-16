@@ -23,7 +23,7 @@ const signup: SignupInfo = {
 function getTimeLeft(deadline: string): Countdown {
   const now = new Date();
   const end = new Date(deadline);
-  const diff = end.getTime() - now.getTime();
+  const diff = Math.max(0, end.getTime() - now.getTime());
 
   return {
     days: Math.floor(diff / (1000 * 60 * 60 * 24)),
@@ -33,16 +33,29 @@ function getTimeLeft(deadline: string): Countdown {
   };
 }
 
+function isExpired(deadline: string) {
+  return new Date().getTime() >= new Date(deadline).getTime();
+}
+
 export default function Countdown() {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft(signup.deadline));
+  const [expired, setExpired] = useState(isExpired(signup.deadline));
 
   useEffect(() => {
+    if (expired) return;
+
     const interval = setInterval(() => {
+      const expiredNow = isExpired(signup.deadline);
+      setExpired(expiredNow);
       setTimeLeft(getTimeLeft(signup.deadline));
+
+      if (expiredNow) {
+        clearInterval(interval);
+      }
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [expired]);
 
   return (
     <section className="w-full bg-blue-50 text-black py-20">
@@ -50,7 +63,7 @@ export default function Countdown() {
         <h2 className="text-3xl font-bold mb-4">Sign Up</h2>
         <p className="text-lg mb-6">Sign up closes on the 12th of December.</p>
 
-        {/* Time grid */}
+        {/* Countdown */}
         <div className="text-2xl font-mono flex justify-center gap-8 mb-6">
           <div>{timeLeft.days}d</div>
           <div>{timeLeft.hours}h</div>
@@ -58,51 +71,61 @@ export default function Countdown() {
           <div>{timeLeft.seconds}s</div>
         </div>
 
-        <div className="flex gap-4 justify-center flex-col md:flex-row">
-          <Button asChild className="px-10 py-6 text-lg">
-            <a href={signup.presentationLink} target="_blank">
-              View Presentation
-            </a>
-          </Button>
+        {/* Buttons */}
+        {!expired ? (
+          <div className="flex gap-4 justify-center flex-col md:flex-row">
+            <Button asChild className="px-10 py-6 text-lg">
+              <a href={signup.presentationLink} target="_blank">
+                View Presentation
+              </a>
+            </Button>
 
+            <Button
+              asChild
+              className="px-10 py-6 text-lg bg-gradient-to-br from-red-500 via-red-600 to-yellow-400"
+            >
+              <a href={signup.signupForm} target="_blank">
+                Sign up! / 参加
+              </a>
+            </Button>
+          </div>
+        ) : (
+          <p className="text-xl font-semibold text-red-600 mt-6">
+            🚫 Sign up is now closed
+          </p>
+        )}
+      </div>
+
+      {/* Floating signup button */}
+      {!expired && (
+        <div className="fixed right-6 z-50 bottom-6">
           <Button
-            asChild
-            className="px-10 py-6 text-lg bg-gradient-to-br from-red-500 via-red-600 to-yellow-400"
+            className="
+              h-24 w-32 rounded-xl
+              bg-gradient-to-br from-red-500 via-red-600 to-yellow-400
+              text-white font-bold text-sm
+              shadow-md hover:scale-105 transition-transform
+              flex flex-col items-center justify-center gap-1
+              px-3 leading-none
+            "
           >
-            <a href={signup.signupForm} target="_blank">
-              Sign up! / 参加
+            <a
+              href={signup.signupForm}
+              target="_blank"
+              className="flex flex-col items-center"
+            >
+              <span className="text-lg">🌸</span>
+              <span className="text-center">Sign Up / 参加</span>
+              <span className="text-xs mt-1">
+                {timeLeft.days > 0
+                  ? `${timeLeft.days}d ${timeLeft.hours}h`
+                  : `${timeLeft.hours}h ${timeLeft.minutes}m ${timeLeft.seconds}s`}{" "}
+                left
+              </span>
             </a>
           </Button>
         </div>
-      </div>
-
-      <div className={`fixed right-6 z-50 bottom-6`}>
-        <Button
-          className="
-      h-24 w-32 rounded-xl
-      bg-gradient-to-br from-red-500 via-red-600 to-yellow-400
-      text-white font-bold text-sm
-      shadow-md hover:scale-105 transition-transform
-      flex flex-col items-center justify-center gap-1
-      px-3 leading-none
-    "
-        >
-          <a
-            href={signup.signupForm}
-            target="_blank"
-            className="flex flex-col items-center"
-          >
-            <span className="text-lg">🌸</span>
-            <span className="text-center">Sign Up / 参加</span>
-            <span className="text-xs mt-1">
-              {timeLeft.days > 0
-                ? `${timeLeft.days}d ${timeLeft.hours}h`
-                : `${timeLeft.hours}h ${timeLeft.minutes}m ${timeLeft.seconds}s`}{" "}
-              left
-            </span>
-          </a>
-        </Button>
-      </div>
+      )}
     </section>
   );
 }
