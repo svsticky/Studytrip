@@ -1,27 +1,20 @@
-import ImageHeader from "~/components/ImageHeader/ImageHeader";
 import TopBar from "~/components/TopBar/TopBar";
-import Activities from "./components/Activities";
-import Costs from "./components/Costs";
-import Countdown from "./components/Countdown";
-import FlightTimeline from "./components/FlightTimeline";
-import Hostel from "./components/Hostel";
-import Schedule from "./components/Schedule";
-import Sponsors from "./components/Sponsors";
-import TripInfo from "./components/TripInfo";
+import Recap from "./components/Recap";
+import SaveTheDate from "./components/SaveTheDate";
 
 export function meta() {
   return [
-    { title: "Study Trip to Tokyo" },
+    { title: "Study Trip 2027 — Save the Date" },
     {
       name: "description",
       content:
-        "Join the 2026 Tokyo study trip organized by STICKY, the study association for Information & Computing Sciences at Utrecht University. Explore Japanese tech, culture, and academics.",
+        "Save the date: the 2027 study trip organized by STICKY, the study association for Information & Computing Sciences at Utrecht University, takes place from 17 to 26 April 2027.",
     },
-    { property: "og:title", content: "Study Trip to Tokyo 2026" },
+    { property: "og:title", content: "Study Trip 2027 — Save the Date" },
     {
       property: "og:description",
       content:
-        "STICKY (Utrecht University) invites you to an unforgettable study trip to Tokyo with tech company visits, university tours, and cultural experiences.",
+        "STICKY (Utrecht University) goes on a study trip from 17 to 26 April 2027. Destination revealed soon!",
     },
   ];
 }
@@ -31,23 +24,9 @@ export default function Home() {
     <div className="flex flex-col">
       <TopBar />
 
-      <ImageHeader />
+      <SaveTheDate />
 
-      <TripInfo />
-
-      <FlightTimeline />
-
-      <Hostel />
-
-      <Activities />
-
-      <Schedule />
-
-      <Costs />
-
-      <Countdown />
-
-      <Sponsors />
+      <Recap />
     </div>
   );
 }
