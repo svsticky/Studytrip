@@ -2,7 +2,7 @@
    Study Trip 2027 — interactions
    Config lives in data/trip.json.
    Preview the reveal:
-   ?preview=reveal&city1=First&code1=AAA&city2=Second&code2=BBB&transfer=train
+   ?preview=reveal&city=Somewhere&code=AAA
    ============================================================ */
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   bindTripInfo(config.trip);
-  initDestinations(config);
+  initDestination(config);
 });
 
 async function loadConfig() {
@@ -33,14 +33,10 @@ async function loadConfig() {
   return res.json();
 }
 
-function getPreviewDestinations() {
+function getPreviewDestination() {
   const params = new URLSearchParams(location.search);
   if (params.get("preview") !== "reveal") return null;
-  return {
-    first: { city: params.get("city1") || "First stop", code: params.get("code1") || "AAA" },
-    second: { city: params.get("city2") || "Second stop", code: params.get("code2") || "BBB" },
-    transfer: params.get("transfer") || "train",
-  };
+  return { city: params.get("city") || "Somewhere", code: params.get("code") || "AAA" };
 }
 
 function bindTripInfo(trip) {
@@ -55,51 +51,43 @@ function bindTripInfo(trip) {
   });
 }
 
-/* ---------- Destinations + countdown ---------- */
+/* ---------- Destination + countdown ---------- */
 
-function initDestinations(config) {
+function initDestination(config) {
   const revealAt = new Date(config.reveal.at).getTime();
   const tripStart = new Date(config.trip.start).getTime();
   const home = config.trip.origin.city;
-  const preview = getPreviewDestinations();
+  const preview = getPreviewDestination();
 
   const rows = {
-    first: createBoard($("#flaps-1")),
-    second: createBoard($("#flaps-2")),
-    home: createBoard($("#flaps-3")),
+    out: createBoard($("#flaps-1")),
+    home: createBoard($("#flaps-2")),
   };
 
   let revealed = false;
 
-  // Flip the rows one after another: first city, second city, then home.
-  const reveal = ({ first, second, transfer }) => {
+  // Flip the rows one after another: destination, then home.
+  const reveal = (destination) => {
     revealed = true;
-    const count = flapCount(first.city, second.city, home);
-    rows.first.show(first.city, count, () => {
-      if (transfer) $("#transfer-label").textContent = transfer.toUpperCase();
-      rows.second.show(second.city, count, () => {
-        rows.home.show(home, count, () => {
-          document.body.classList.add("is-revealed");
-          setStatus("Confirmed", true);
-          $("#board").setAttribute(
-            "aria-label",
-            `Destinations: ${first.city}, then ${second.city}`,
-          );
-          setPassDestinations(first, second, transfer);
-          if (!reduceMotion) confetti();
-        });
+    const count = flapCount(destination.city, home);
+    rows.out.show(destination.city, count, () => {
+      rows.home.show(home, count, () => {
+        document.body.classList.add("is-revealed");
+        setStatus("Confirmed", true);
+        $("#board").setAttribute("aria-label", `Destination: ${destination.city}`);
+        setPassDestination(destination);
+        if (!reduceMotion) confetti();
       });
     });
   };
 
-  const destinations = preview || config.reveal.destinations;
-  if (destinations && (preview || Date.now() >= revealAt)) {
+  const destination = preview || config.reveal.destination;
+  if (destination && (preview || Date.now() >= revealAt)) {
     // Small delay so the hero entrance finishes first.
-    setTimeout(() => reveal(destinations), reduceMotion ? 0 : 900);
+    setTimeout(() => reveal(destination), reduceMotion ? 0 : 900);
   } else {
     const count = flapCount(home);
-    rows.first.tease(count);
-    rows.second.tease(count);
+    rows.out.tease(count);
     rows.home.show(home, count);
   }
 
@@ -108,9 +96,9 @@ function initDestinations(config) {
   const tick = () => {
     const now = Date.now();
     if (!revealed && now >= revealAt && !polling) {
-      // Reveal moment passed while the page was open: fetch the destinations.
+      // Reveal moment passed while the page was open: fetch the destination.
       polling = true;
-      pollForDestinations(reveal);
+      pollForDestination(reveal);
     }
 
     if (revealed || now >= revealAt) {
@@ -122,7 +110,7 @@ function initDestinations(config) {
       $("#countdown-label").textContent = "Departure in";
       renderCountdown(tripStart - now);
     } else {
-      $("#countdown-label").textContent = "Destinations reveal in";
+      $("#countdown-label").textContent = "Destination reveal in";
       renderCountdown(revealAt - now);
     }
   };
@@ -134,15 +122,15 @@ function flapCount(...texts) {
   return Math.max(MIN_FLAPS, ...texts.map((t) => t.length + 2));
 }
 
-async function pollForDestinations(onFound) {
+async function pollForDestination(onFound) {
   setStatus("Revealing…");
   try {
     const config = await loadConfig();
-    if (config.reveal.destinations) return onFound(config.reveal.destinations);
+    if (config.reveal.destination) return onFound(config.reveal.destination);
   } catch {
     /* try again below */
   }
-  setTimeout(() => pollForDestinations(onFound), 30_000);
+  setTimeout(() => pollForDestination(onFound), 30_000);
 }
 
 function renderCountdown(ms) {
@@ -159,15 +147,12 @@ function setStatus(text, final = false) {
   el.classList.toggle("is-final", final);
 }
 
-function setPassDestinations(first, second, transfer) {
+function setPassDestination(destination) {
   const items = [
-    [$("#pass-code-1"), first.code],
-    [$("#pass-city-1"), first.city],
-    [$("#pass-code-2"), second.code],
-    [$("#pass-city-2"), second.city],
-    [$("#stub-code"), `${first.code}\n${second.code}`],
+    [$("#pass-code"), destination.code],
+    [$("#pass-city"), destination.city],
+    [$("#stub-code"), destination.code],
   ];
-  if (transfer) items.push([$("#pass-transfer"), `by ${transfer}`]);
   for (const [el, text] of items) {
     el.textContent = text;
     el.classList.remove("pop");
