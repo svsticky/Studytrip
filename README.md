@@ -80,12 +80,38 @@ http://localhost:8000/?preview=reveal&city=Somewhere&code=AAA
 
 ## Deployment
 
-The Dockerfile serves the site with nginx on port 3000:
+### Deploy pre-build image
+The `Dockerfile` located at the root of this repository will be build upon push to the main branch.
+
+the build will result in 3 tags:
+```
+- :latest
+- :year-month-day
+- :year-month-day-hash
+```
+
+The image can be run with the following basic compose file:
+```docker-compose
+services:
+  studytrip:
+      container_name:studytrip
+      image: ghcr.io/svsticky/studytrip:latest
+      ports:
+        - 3000:3000 #The container exposes on 3000
+```
+
+### Build on-premise
+
+After cloning the the repository. The container can be build by running
 
 ```bash
 docker build -t studytrip .
+```
+
+To run the container you can use:
+```bash
 docker run -p 3000:3000 studytrip
 ```
 
-Since the site is just static files, it can also be hosted anywhere that
+Since the site is just static files, it can also be hosted anywhere that 
 serves static files, such as GitHub Pages or any web server.
