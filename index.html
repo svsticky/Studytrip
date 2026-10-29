@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Studytrip 2027 — Save the Date</title>
+    <meta
+      name="description"
+      content="Save the date: the 2027 study trip organized by STICKY, the study association for Information & Computing Sciences at Utrecht University, takes place from 17 to 26 April 2027."
+    />
+    <meta property="og:title" content="Studytrip 2027 — Save the Date" />
+    <meta
+      property="og:description"
+      content="STICKY (Utrecht University) goes on a study trip from 17 to 26 April 2027. Where to? Find out soon."
+    />
+    <meta property="og:image" content="assets/header.jpg" />
+    <meta name="theme-color" content="#a7b0d8" />
+    <link rel="icon" href="favicon.ico" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Gochi+Hand&family=JetBrains+Mono:wght@500;700&family=Playfair+Display:wght@400;500&display=swap"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/main.js" defer></script>
+  </head>
+
+  <body>
+    <canvas id="confetti" aria-hidden="true"></canvas>
+
+    <header class="nav">
+      <a href="#top" class="nav__logo" aria-label="STICKY">
+        <img src="assets/logo_compact_outline_zwart.svg" alt="STICKY" />
+      </a>
+      <nav class="nav__links">
+        <a href="#dates">Dates</a>
+        <a href="#pass">Ticket</a>
+        <a href="#recap">Recap 2026</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <!-- ============ HERO ============ -->
+      <section class="hero paper paper--blue">
+        <span class="tape tape--hero-left" aria-hidden="true"></span>
+        <span class="tape tape--hero-right" aria-hidden="true"></span>
+        <span class="asterisk" aria-hidden="true">✱</span>
+
+        <div class="hero__heading">
+          <h1 class="display hero__title">Studytrip</h1>
+          <p class="hand hero__std">
+            Save the date!
+            <svg class="swoosh" viewBox="0 0 300 30" aria-hidden="true">
+              <path d="M5 18 C 80 8, 180 6, 295 12" />
+              <path d="M30 26 C 110 18, 200 17, 270 21" />
+            </svg>
+          </p>
+        </div>
+
+        <svg class="plane" viewBox="0 0 240 130" aria-hidden="true">
+          <!-- tail -->
+          <path d="M196 54 L222 14 Q230 8 232 18 L226 62 Z" fill="#e48887" />
+          <!-- back wing -->
+          <path d="M150 50 L196 20 Q206 16 204 26 L178 58 Z" fill="#e48887" />
+          <!-- body -->
+          <path
+            d="M20 82 Q14 66 40 58 L196 50 Q236 52 236 70 Q236 88 196 92 L52 98 Q26 98 20 82 Z"
+            fill="#f4b9b8"
+          />
+          <!-- cockpit -->
+          <path d="M28 70 Q38 58 62 60 L58 74 Q40 76 28 70 Z" fill="#2c3446" />
+          <!-- windows -->
+          <g fill="#2c3446">
+            <circle cx="86" cy="68" r="5" />
+            <circle cx="108" cy="67" r="5" />
+            <circle cx="130" cy="66" r="5" />
+            <circle cx="152" cy="65" r="5" />
+            <circle cx="174" cy="64" r="5" />
+          </g>
+          <!-- front wing -->
+          <path d="M96 80 L178 80 L220 120 Q222 128 210 126 Z" fill="#e48887" />
+          <path d="M96 80 L210 126" stroke="#9c5658" stroke-width="1.5" fill="none" />
+          <path d="M20 82 Q60 92 196 88" stroke="#e48887" stroke-width="2" fill="none" />
+        </svg>
+
+        <div class="board-wrap">
+          <span class="tape tape--board-left" aria-hidden="true"></span>
+          <span class="tape tape--board-right" aria-hidden="true"></span>
+          <div class="board" id="board" role="img" aria-label="Destinations: secret" aria-live="polite">
+            <div class="board__head">
+              <span>Departures</span>
+              <span class="board__status" id="board-status">Boarding soon</span>
+            </div>
+            <div class="board__grid">
+            <div class="board__row board__row--labels">
+              <span>Flight</span><span>Destination</span><span>Date</span>
+            </div>
+            <div class="board__row">
+              <span class="board__mono">STK417</span>
+              <div class="flaps" id="flaps-1"></div>
+              <span class="board__mono">17 APR</span>
+            </div>
+            <div class="board__row">
+              <span class="board__mono" id="transfer-label">OVERLAND</span>
+              <div class="flaps" id="flaps-2"></div>
+              <span class="board__mono">TBA</span>
+            </div>
+            <div class="board__row">
+              <span class="board__mono">STK426</span>
+              <div class="flaps" id="flaps-3"></div>
+              <span class="board__mono">26 APR</span>
+            </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="countdown">
+          <p class="hand countdown__label" id="countdown-label">Destinations reveal in</p>
+          <div class="countdown__grid">
+            <div><span id="cd-days">–</span><small>days</small></div>
+            <div><span id="cd-hours">–</span><small>hours</small></div>
+            <div><span id="cd-min">–</span><small>min</small></div>
+            <div><span id="cd-sec">–</span><small>sec</small></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ DATES ============ -->
+      <section class="dates paper paper--rose" id="dates">
+        <svg class="waves waves--right" viewBox="0 0 300 200" aria-hidden="true">
+          <path d="M0 30 C 60 0, 120 60, 180 30 S 270 0, 300 30" />
+          <path d="M0 70 C 60 40, 120 100, 180 70 S 270 40, 300 70" />
+          <path d="M0 110 C 60 80, 120 140, 180 110 S 270 80, 300 110" />
+          <path d="M0 150 C 60 120, 120 180, 180 150 S 270 120, 300 150" />
+        </svg>
+        <svg class="rails" viewBox="0 0 200 320" aria-hidden="true">
+          <path class="rails__line" d="M10 10 C 140 40, 40 200, 190 310" />
+          <path class="rails__line" d="M28 4 C 160 36, 58 196, 200 296" />
+          <path class="rails__ties" d="M19 7 C 150 38, 49 198, 195 303" />
+        </svg>
+
+        <div class="scallop">
+          <span class="pin pin--left" aria-hidden="true"></span>
+          <span class="pin pin--right" aria-hidden="true"></span>
+
+          <h2 class="agenda__title">Save the dates:</h2>
+
+          <ol class="agenda">
+            <li>
+              <time class="agenda__date" datetime="2026-12-03">3<small>Dec</small></time>
+              <div>
+                <h3>Hypeborrel</h3>
+                <p>17:15–19:30</p>
+              </div>
+            </li>
+            <li>
+              <time class="agenda__date" datetime="2026-12-15">15<small>Dec</small></time>
+              <div>
+                <h3>Contractborrel</h3>
+                <p>Sign your contract</p>
+              </div>
+            </li>
+            <li>
+              <time class="agenda__date" datetime="2027-03-10">10<small>Mar</small></time>
+              <div>
+                <h3>Deelnemersborrel</h3>
+                <p>Drinks with all participants</p>
+              </div>
+            </li>
+            <li class="agenda__trip">
+              <time class="agenda__date" datetime="2027-04-17">17<small>Apr</small></time>
+              <div>
+                <h3>Studytrip!</h3>
+                <p>17–26 April 2027</p>
+              </div>
+            </li>
+          </ol>
+
+          <svg class="compass" viewBox="0 0 120 140" aria-hidden="true">
+            <circle cx="60" cy="12" r="8" />
+            <circle cx="60" cy="78" r="52" />
+            <circle cx="60" cy="78" r="44" />
+            <path class="compass__needle" d="M60 38 L66 78 L60 118 L54 78 Z" />
+            <path d="M20 78 L60 72 L100 78 L60 84 Z" />
+            <text x="60" y="44">N</text>
+            <text x="60" y="120">S</text>
+            <text x="22" y="82">W</text>
+            <text x="98" y="82">E</text>
+          </svg>
+        </div>
+      </section>
+
+      <!-- ============ BOARDING PASS ============ -->
+      <section class="section paper paper--blue" id="pass">
+        <div class="section__intro">
+          <h2 class="display section__title">Your ticket</h2>
+          <p>
+            Ten days, two cities! We fly to the first, travel overland to the
+            second and fly home from there. More info on the programme and how to sign
+            up will follow. Keep an eye on this page!
+          </p>
+        </div>
+
+        <div class="pass-wrap">
+          <span class="tape tape--pass" aria-hidden="true"></span>
+          <article class="pass">
+            <div class="pass__main">
+              <div class="pass__top">
+                <img
+                  src="assets/logo_compact_outline_zwart.svg"
+                  alt="STICKY"
+                  class="pass__logo"
+                />
+                <span class="pass__class">Study Class</span>
+              </div>
+
+              <div class="pass__route">
+                <div class="pass__stop">
+                  <span class="pass__code" data-bind="originCode">AMS</span>
+                  <span class="pass__city" data-bind="originCity">Amsterdam</span>
+                </div>
+                <div class="pass__leg" aria-hidden="true">
+                  <span class="pass__line"></span>
+                  <svg class="pass__plane" viewBox="0 0 24 24">
+                    <path
+                      d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"
+                    />
+                  </svg>
+                </div>
+                <div class="pass__stop">
+                  <span class="pass__code" id="pass-code-1">???</span>
+                  <span class="pass__city" id="pass-city-1">Secret</span>
+                </div>
+                <div class="pass__leg pass__leg--ground">
+                  <span class="pass__line"></span>
+                  <span class="pass__transfer" id="pass-transfer">by land</span>
+                </div>
+                <div class="pass__stop">
+                  <span class="pass__code" id="pass-code-2">???</span>
+                  <span class="pass__city" id="pass-city-2">Secret</span>
+                </div>
+                <div class="pass__leg" aria-hidden="true">
+                  <span class="pass__line"></span>
+                  <svg class="pass__plane" viewBox="0 0 24 24">
+                    <path
+                      d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"
+                    />
+                  </svg>
+                </div>
+                <div class="pass__stop">
+                  <span class="pass__code" data-bind="originCode">AMS</span>
+                  <span class="pass__city" data-bind="originCity">Amsterdam</span>
+                </div>
+              </div>
+
+              <dl class="pass__details">
+                <div><dt>Passenger</dt><dd>You?</dd></div>
+                <div><dt>Departure</dt><dd>17 APR 2027</dd></div>
+                <div><dt>Return</dt><dd>26 APR 2027</dd></div>
+                <div><dt>Seat</dt><dd>Window, obviously</dd></div>
+              </dl>
+            </div>
+
+            <div class="pass__stub">
+              <span class="pass__stub-label">Boarding</span>
+              <span class="pass__stub-code" id="stub-code">???
+???</span>
+              <div class="pass__barcode" aria-hidden="true"></div>
+              <span class="pass__stub-label">STK2027</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============ RECAP ============ -->
+      <section class="section paper paper--blue recap" id="recap">
+        <div class="section__intro">
+          <h2 class="display section__title">Tokyo 2026</h2>
+          <p class="hand recap__dates">a look back · 11 – 22 April 2026</p>
+        </div>
+
+        <div class="recap__hero">
+          <span class="tape tape--photo-left" aria-hidden="true"></span>
+          <span class="tape tape--photo-right" aria-hidden="true"></span>
+          <img src="assets/header.jpg" alt="Tokyo skyline" class="recap__photo" />
+          <img
+            src="assets/tokyo-2026-logo.png"
+            alt="Studiereis 2026 — Tokyo, Japan"
+            class="recap__sticker"
+          />
+        </div>
+
+        <p class="recap__intro">
+          Last year we travelled more than 9,000 km east to Tokyo for an
+          unforgettable mix of technology, academia and Japanese culture. A few
+          snapshots:
+        </p>
+
+        <div class="polaroids">
+          <figure class="polaroid">
+            <span class="pin" aria-hidden="true"></span>
+            <img src="assets/recap/group-photo.jpg" alt="The whole crew with the STICKY flag" loading="lazy" />
+            <figcaption>The whole crew!</figcaption>
+          </figure>
+          <figure class="polaroid">
+            <span class="tape tape--polaroid" aria-hidden="true"></span>
+            <img src="assets/recap/tokyo-tower.jpg" alt="Tokyo Tower lit up at night" loading="lazy" />
+            <figcaption>Tokyo Tower by night</figcaption>
+          </figure>
+          <figure class="polaroid">
+            <span class="pin" aria-hidden="true"></span>
+            <img src="assets/recap/sushi.jpg" alt="Group selfie at a sushi restaurant" loading="lazy" />
+            <figcaption>Sushi time</figcaption>
+          </figure>
+          <figure class="polaroid">
+            <span class="tape tape--polaroid" aria-hidden="true"></span>
+            <img src="assets/recap/asakusa.jpg" alt="Walking down a street in Asakusa" loading="lazy" />
+            <figcaption>Exploring Asakusa</figcaption>
+          </figure>
+          <figure class="polaroid">
+            <span class="pin" aria-hidden="true"></span>
+            <img src="assets/recap/neon.jpg" alt="Busy street full of neon signs" loading="lazy" />
+            <figcaption>Neon nights</figcaption>
+          </figure>
+          <figure class="polaroid">
+            <span class="tape tape--polaroid" aria-hidden="true"></span>
+            <img src="assets/uTokyo.jpg" alt="University of Tokyo campus" loading="lazy" />
+            <figcaption>University of Tokyo</figcaption>
+          </figure>
+          <figure class="polaroid">
+            <span class="pin" aria-hidden="true"></span>
+            <img src="assets/recap/sake-barrels.jpg" alt="Wall of decorated sake barrels" loading="lazy" />
+            <figcaption>Sake barrels</figcaption>
+          </figure>
+          <figure class="polaroid">
+            <span class="tape tape--polaroid" aria-hidden="true"></span>
+            <img src="assets/recap/crossing.jpg" alt="Crowded pedestrian crossing seen from above" loading="lazy" />
+            <figcaption>Rush hour</figcaption>
+          </figure>
+          <figure class="polaroid">
+            <span class="pin" aria-hidden="true"></span>
+            <img src="assets/recap/night-out.jpg" alt="The group at a bar in the evening" loading="lazy" />
+            <figcaption>Evenings out</figcaption>
+          </figure>
+          <figure class="polaroid">
+            <span class="tape tape--polaroid" aria-hidden="true"></span>
+            <img src="assets/recap/pagoda.jpg" alt="Red five-storied pagoda among trees" loading="lazy" />
+            <figcaption>Temples &amp; pagodas</figcaption>
+          </figure>
+          <figure class="polaroid">
+            <span class="pin" aria-hidden="true"></span>
+            <img src="assets/recap/disneysea-group.jpg" alt="Group photo at Tokyo DisneySea" loading="lazy" />
+            <figcaption>Tokyo DisneySea</figcaption>
+          </figure>
+          <figure class="polaroid">
+            <span class="tape tape--polaroid" aria-hidden="true"></span>
+            <img src="assets/recap/alley.jpg" alt="Narrow alley with lanterns at night" loading="lazy" />
+            <figcaption>Hidden alleys</figcaption>
+          </figure>
+          <figure class="polaroid">
+            <span class="pin" aria-hidden="true"></span>
+            <img src="assets/recap/torii-selfie.jpg" alt="Selfie in front of a torii gate" loading="lazy" />
+            <figcaption>Torii selfie</figcaption>
+          </figure>
+          <figure class="polaroid">
+            <span class="tape tape--polaroid" aria-hidden="true"></span>
+            <img src="assets/recap/sunset-street.jpg" alt="Tokyo street at sunset" loading="lazy" />
+            <figcaption>Golden hour</figcaption>
+          </figure>
+          <figure class="polaroid">
+            <span class="pin" aria-hidden="true"></span>
+            <img src="assets/recap/disneysea.jpg" alt="Rocky cliff with a waterfall at Tokyo DisneySea" loading="lazy" />
+            <figcaption>Adventures at DisneySea</figcaption>
+          </figure>
+          <figure class="polaroid">
+            <span class="tape tape--polaroid" aria-hidden="true"></span>
+            <img src="assets/recap/park.jpg" alt="The group walking through a park" loading="lazy" />
+            <figcaption>Out and about</figcaption>
+          </figure>
+          <figure class="polaroid">
+            <span class="pin" aria-hidden="true"></span>
+            <img src="assets/recap/street.jpg" alt="Street with a train passing over a bridge" loading="lazy" />
+            <figcaption>Street life</figcaption>
+          </figure>
+        </div>
+
+        <div class="more-photos">
+          <a
+            class="button"
+            href="https://fotos.svsticky.nl/studytrip-2026-%7C-tokyo/"
+            target="_blank"
+            rel="noopener"
+          >
+            See more pictures of our trip!
+          </a>
+        </div>
+
+        <div class="sponsor">
+          <p class="hand">Thanks to our sponsor for making the 2026 trip possible!</p>
+          <img src="assets/keronic.jpg" alt="Keronic" loading="lazy" />
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer paper paper--rose">
+      <img src="assets/sushi_cat.png" alt="" class="footer__cat" />
+      <p>
+        Organised by the Study Trip Committee of
+        <a href="https://svsticky.nl" target="_blank" rel="noopener">STICKY</a>,
+        study association for Information &amp; Computing Sciences at Utrecht
+        University.
+      </p>
+    </footer>
+  </body>
+</html>
