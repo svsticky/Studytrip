@@ -31,44 +31,37 @@ python3 -m http.server 8000
 
 Then open http://localhost:8000.
 
-## Revealing the destinations
+## Revealing the destination
 
-This trip has two destinations: we fly from Amsterdam to the first city,
-travel overland to the second city, and fly home from there. The departure
-board has a row for each leg and shows `?????` for both cities until the
-reveal moment. The reveal is configured in `data/trip.json`:
+The departure board has a row for the outbound flight and one for the flight
+home, and shows `?????` for the destination until the reveal moment. The
+reveal is configured in `data/trip.json`:
 
 ```json
 "reveal": {
   "at": "2026-11-20T20:00:00+01:00",
-  "destinations": null
+  "destination": null
 }
 ```
 
 - `at`: when the countdown ends. Include the timezone offset (`+01:00` in
   winter, `+02:00` in summer).
-- `destinations`: **leave this `null` until the reveal.** Everything in a
+- `destination`: **leave this `null` until the reveal.** Everything in a
   static site is public, so anyone who opens `trip.json` would see the
-  destinations. On reveal day, fill it in and deploy:
+  destination. On reveal day, fill it in and deploy:
 
   ```json
-  "destinations": {
-    "first": { "city": "First city", "code": "AAA" },
-    "second": { "city": "Second city", "code": "BBB" },
-    "transfer": "train"
-  }
+  "destination": { "city": "City", "code": "AAA" }
   ```
 
-  `code` is the airport or station code shown on the boarding pass, and
-  `transfer` is how we travel between the two cities (for example `train` or
-  `bus`). Visitors who have the page open when the countdown hits zero get the
-  reveal automatically, because the page re-checks `trip.json` every 30
-  seconds.
+  `code` is the airport code shown on the boarding pass. Visitors who have the
+  page open when the countdown hits zero get the reveal automatically, because
+  the page re-checks `trip.json` every 30 seconds.
 
 To test the reveal animation locally without touching `trip.json`:
 
 ```
-http://localhost:8000/?preview=reveal&city1=First&code1=AAA&city2=Second&code2=BBB&transfer=train
+http://localhost:8000/?preview=reveal&city=Somewhere&code=AAA
 ```
 
 ## Editing content

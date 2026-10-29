@@ -88,7 +88,7 @@
         <div class="board-wrap">
           <span class="tape tape--board-left" aria-hidden="true"></span>
           <span class="tape tape--board-right" aria-hidden="true"></span>
-          <div class="board" id="board" role="img" aria-label="Destinations: secret" aria-live="polite">
+          <div class="board" id="board" role="img" aria-label="Destination: secret" aria-live="polite">
             <div class="board__head">
               <span>Departures</span>
               <span class="board__status" id="board-status">Boarding soon</span>
@@ -103,13 +103,8 @@
               <span class="board__mono">17 APR</span>
             </div>
             <div class="board__row">
-              <span class="board__mono" id="transfer-label">OVERLAND</span>
-              <div class="flaps" id="flaps-2"></div>
-              <span class="board__mono">TBA</span>
-            </div>
-            <div class="board__row">
               <span class="board__mono">STK426</span>
-              <div class="flaps" id="flaps-3"></div>
+              <div class="flaps" id="flaps-2"></div>
               <span class="board__mono">26 APR</span>
             </div>
             </div>
@@ -117,7 +112,7 @@
         </div>
 
         <div class="countdown">
-          <p class="hand countdown__label" id="countdown-label">Destinations reveal in</p>
+          <p class="hand countdown__label" id="countdown-label">Destination reveal in</p>
           <div class="countdown__grid">
             <div><span id="cd-days">–</span><small>days</small></div>
             <div><span id="cd-hours">–</span><small>hours</small></div>
@@ -197,9 +192,8 @@
         <div class="section__intro">
           <h2 class="display section__title">Your ticket</h2>
           <p>
-            Ten days, two cities! We fly to the first, travel overland to the
-            second and fly home from there. More info on the programme and how to sign
-            up will follow. Keep an eye on this page!
+            Ten days, one secret destination! More info on the programme and how to
+            sign up will follow. Keep an eye on this page!
           </p>
         </div>
 
@@ -230,16 +224,8 @@
                   </svg>
                 </div>
                 <div class="pass__stop">
-                  <span class="pass__code" id="pass-code-1">???</span>
-                  <span class="pass__city" id="pass-city-1">Secret</span>
-                </div>
-                <div class="pass__leg pass__leg--ground">
-                  <span class="pass__line"></span>
-                  <span class="pass__transfer" id="pass-transfer">by land</span>
-                </div>
-                <div class="pass__stop">
-                  <span class="pass__code" id="pass-code-2">???</span>
-                  <span class="pass__city" id="pass-city-2">Secret</span>
+                  <span class="pass__code" id="pass-code">???</span>
+                  <span class="pass__city" id="pass-city">Secret</span>
                 </div>
                 <div class="pass__leg" aria-hidden="true">
                   <span class="pass__line"></span>
@@ -265,8 +251,7 @@
 
             <div class="pass__stub">
               <span class="pass__stub-label">Boarding</span>
-              <span class="pass__stub-code" id="stub-code">???
-???</span>
+              <span class="pass__stub-code" id="stub-code">???</span>
               <div class="pass__barcode" aria-hidden="true"></div>
               <span class="pass__stub-label">STK2027</span>
             </div>
