@@ -102,12 +102,16 @@ services:
 
 ### Build on-premise
 
-The Dockerfile serves the site with nginx on port 3000:
+After cloning the the repository. The container can be build by running
 
 ```bash
 docker build -t studytrip .
+```
+
+To run the container you can use:
+```bash
 docker run -p 3000:3000 studytrip
 ```
 
-Since the site is just static files, it can also be hosted anywhere that
+Since the site is just static files, it can also be hosted anywhere that 
 serves static files, such as GitHub Pages or any web server.
